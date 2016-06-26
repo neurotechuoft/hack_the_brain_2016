@@ -25,8 +25,8 @@ class PluginCSVInitFocused(plugintypes.IPluginExtended):
 		self.file_name = self.file_name + '.csv'
 		print "Will export CSV to:", self.file_name
 		#Open in append mode
-		with open(self.file_name, 'a') as f:
-			f.write('%'+self.time_stamp + '\n')
+		# with open(self.file_name, 'a') as f:
+		# 	f.write('%'+self.time_stamp + '\n')
 
 	def deactivate(self):
 		print "Closing, CSV saved to:", self.file_name
