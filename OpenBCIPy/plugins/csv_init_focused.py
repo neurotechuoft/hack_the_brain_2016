@@ -14,6 +14,8 @@ class PluginCSVInitFocused(plugintypes.IPluginExtended):
 		self.verbose = verbose
 
 	def activate(self):
+		self.num_of_samples = 0
+
 		# Wipe file
 		with open(self.file_name, 'w') as f:
 			f.truncate()
@@ -40,24 +42,27 @@ class PluginCSVInitFocused(plugintypes.IPluginExtended):
 		print "Optional argument: [filename] (default: collect.csv)"
 
 	def __call__(self, sample):
+		self.num_of_samples += 1
+		
 		t = timeit.default_timer() - self.start_time
 
-		#print timeSinceStart|Sample Id
+		# print timeSinceStart|Sample Id
 		if self.verbose:
 			print("CSV: %f | %d" %(t,sample.id))
 
-		if t < 10:
+		# Save 10 seconds of data
+		if self.num_of_samples < 2560:
 			row = ''
 			row += str(t)
 			row += self.delim
+
 			row += str(sample.id)
 			row += self.delim
+
 			for i in sample.channel_data:
 				row += str(i)
 				row += self.delim
-			for i in sample.aux_data:
-				row += str(i)
-				row += self.delim
+
 			#remove last comma
 			row += '\n'
 			with open(self.file_name, 'a') as f:
