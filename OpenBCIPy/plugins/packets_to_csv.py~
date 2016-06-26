@@ -1,6 +1,6 @@
 import plugin_interface as plugintypes
 
-class PluginSaveToArray(plugintypes.IPluginExtended):
+class PluginPacketsToCSV(plugintypes.IPluginExtended):
     
     # __init__
 	def activate(self):

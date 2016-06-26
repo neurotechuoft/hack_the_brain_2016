@@ -1,6 +1,6 @@
 [Core]
-Name = graph_two
-Module = graph_two
+Name = save_to_array
+Module = save_to_array
 
 [Documentation]
 Author = Various

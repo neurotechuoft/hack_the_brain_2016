@@ -1,6 +1,6 @@
 [Core]
-Name = save_to_array
-Module = save_to_array
+Name = packets_to_csv
+Module = packets_to_csv
 
 [Documentation]
 Author = Various
