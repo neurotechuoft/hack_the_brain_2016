@@ -14,6 +14,11 @@ class PluginCSVInitFocused(plugintypes.IPluginExtended):
 		self.verbose = verbose
 
 	def activate(self):
+		# Wipe file
+		with open(self.file_name, 'w') as f:
+			f.truncate()
+			f.close()
+
 		if len(self.args) > 0:
 			if 'no_time' in self.args:
 				self.file_name = self.args[0]
@@ -22,7 +27,6 @@ class PluginCSVInitFocused(plugintypes.IPluginExtended):
 			if 'verbose' in self.args:
 				self.verbose = True
 
-		self.file_name = self.file_name + '.csv'
 		print "Will export CSV to:", self.file_name
 		#Open in append mode
 		# with open(self.file_name, 'a') as f:
@@ -42,18 +46,19 @@ class PluginCSVInitFocused(plugintypes.IPluginExtended):
 		if self.verbose:
 			print("CSV: %f | %d" %(t,sample.id))
 
-		row = ''
-		row += str(t)
-		row += self.delim
-		row += str(sample.id)
-		row += self.delim
-		for i in sample.channel_data:
-			row += str(i)
+		if t < 10:
+			row = ''
+			row += str(t)
 			row += self.delim
-		for i in sample.aux_data:
-			row += str(i)
+			row += str(sample.id)
 			row += self.delim
-		#remove last comma
-		row += '\n'
-		with open(self.file_name, 'a') as f:
-			f.write(row)
+			for i in sample.channel_data:
+				row += str(i)
+				row += self.delim
+			for i in sample.aux_data:
+				row += str(i)
+				row += self.delim
+			#remove last comma
+			row += '\n'
+			with open(self.file_name, 'a') as f:
+				f.write(row)
