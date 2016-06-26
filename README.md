@@ -2,6 +2,5 @@
 
 ## Launching the web application
 
-Navigate to the folder
-```cd app
-gulp serve```
+Navigate to [app] folder
+```gulp serve```
