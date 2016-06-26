@@ -210,3 +210,11 @@ class PluginPacketsToCSV(plugintypes.IPluginExtended):
 			row += '\n'
 			with open(self.file_name, 'a') as f:
 				f.write(row)
+		else:
+			print "Time to wipe :D\n\n\n"
+			
+			# Wipe file
+			with open(self.file_name, 'w') as f:
+				f.truncate()
+				f.close()
+			self.num_of_samples = 0
