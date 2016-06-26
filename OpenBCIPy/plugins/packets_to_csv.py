@@ -103,6 +103,11 @@ class PluginPacketsToCSV(plugintypes.IPluginExtended):
 		now = datetime.datetime.now()
 		self.time_stamp = '%d-%d-%d_%d-%d-%d'%(now.year,now.month,now.day,now.hour,now.minute,now.second)
 
+		# Wipe file
+		with open(self.file_name, 'w') as f:
+			f.truncate()
+			f.close()
+
 		# Open in append mode
 		with open(self.file_name, 'a') as f:
 			f.write('%'+self.time_stamp + '\n')
@@ -117,7 +122,6 @@ class PluginPacketsToCSV(plugintypes.IPluginExtended):
 			key_values_row = []
 
 			# Create an array of : (sample number, s1, s2 ... s8)
-
 			key_values_row.append(sample.id)
 
 			for i in sample.channel_data:
@@ -126,8 +130,21 @@ class PluginPacketsToCSV(plugintypes.IPluginExtended):
 			# Append row to self.array
 			self.array.append(key_values_row)
 
+			# Once 2 secs of data collected, wipe old CSV and write in new data
 			if len(self.array) == 512:
+
+				# # Wipe file
+				# with open(self.file_name, 'w') as f:
+				# 	f.truncate()
+				# 	f.close()
+				#
+				# Write in new data
+				# with open(self.file_name, 'a') as f:
+				#
+				# 	for row in self.array:
+				# 		f.write(row)
+
 			    print self.array
-			    print "Yahhaaayyyyy"
+			    print "Yahhaaayyyyy\n\n\n"
 
 			    self.array = []
