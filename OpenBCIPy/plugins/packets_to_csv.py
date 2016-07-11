@@ -193,7 +193,7 @@ class PluginPacketsToCSV(plugintypes.IPluginExtended):
 		if self.verbose:
 			print("CSV: %f | %d" %(t,sample.id))
 
-		# Save 10 seconds of data
+		# Save 2 seconds of data (256Hz *  2 secs)
 		if self.num_of_samples <= 512:
 			row = ''
 			row += str(t)
